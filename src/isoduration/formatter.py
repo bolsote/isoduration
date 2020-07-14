@@ -30,19 +30,16 @@ def check_global_sign(duration: Duration) -> int:
     return +1
 
 
-def validate_date_duration(date_duration: DateDuration) -> bool:
+def validate_date_duration(date_duration: DateDuration) -> None:
     if date_duration.weeks:
         if date_duration.years or date_duration.months or date_duration.days:
-            return False
-
-    return True
+            raise DurationFormattingException(
+                "Weeks are incompatible with other date designators"
+            )
 
 
 def format_date(date_duration: DateDuration, global_sign: int) -> str:
-    if not validate_date_duration(date_duration):
-        raise DurationFormattingException(
-            "Weeks are incompatible with other date designators"
-        )
+    validate_date_duration(date_duration)
 
     date_duration_str = "P"
 
