@@ -1,0 +1,14 @@
+isodate
+bandit
+black
+dlint
+flake8
+flake8-bugbear
+hypothesis
+isort<5
+mypy
+pylint
+pytest
+pytest-benchmark
+pytest-cov
+tox

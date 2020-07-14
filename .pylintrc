@@ -1,0 +1,22 @@
+[MASTER]
+ignore=.git ve
+jobs=4
+persistent=yes
+suggestion-mode=yes
+
+[MESSAGES CONTROL]
+disable=missing-docstring
+
+[REPORTS]
+output-format=text
+reports=no
+score=no
+
+[BASIC]
+good-names=ch, k, l, m, n, _
+
+[FORMAT]
+max-line-length=88
+
+[MISCELLANEOUS]
+notes=FIXME, XXX, TODO
