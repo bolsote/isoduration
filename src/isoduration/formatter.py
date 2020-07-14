@@ -3,8 +3,6 @@ from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 def check_global_sign(duration: Duration) -> int:
-    # pylint: disable=too-many-return-statements
-
     date_duration, time_duration = duration
 
     is_date_negative = (
@@ -22,17 +20,12 @@ def check_global_sign(duration: Duration) -> int:
     if date_duration != DateDuration() and time_duration != TimeDuration():
         if is_date_negative and is_time_negative:
             return -1
-        return +1
-
-    if date_duration != DateDuration():
+    elif date_duration != DateDuration():
         if is_date_negative:
             return -1
-        return +1
-
-    if time_duration != TimeDuration():
+    elif time_duration != TimeDuration():
         if is_time_negative:
             return -1
-        return +1
 
     return +1
 
@@ -41,7 +34,6 @@ def validate_date_duration(date_duration: DateDuration) -> bool:
     if date_duration.weeks:
         if date_duration.years or date_duration.months or date_duration.days:
             return False
-        return True
 
     return True
 
