@@ -7,11 +7,7 @@ from isoduration.types import DateDuration, TimeDuration
 
 
 item_st = decimals(
-    min_value=-1_000_000_000,
-    max_value=+1_000_000_000,
-    places=8,
-    allow_nan=False,
-    allow_infinity=False,
+    min_value=-1_000_000_000_000, max_value=+1_000_000_000_000, places=10
 )
 
 date_duration_st: SearchStrategy[DateDuration] = builds(
