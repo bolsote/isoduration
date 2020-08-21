@@ -29,8 +29,8 @@ def parse_designator(designators: Dict[str, str], target: str) -> str:
     while True:
         try:
             key, value = designators.popitem(last=False)  # type: ignore
-        except KeyError:
-            raise OutOfDesignators
+        except KeyError as exc:
+            raise OutOfDesignators from exc
 
         if key == target:
             return value
