@@ -2,14 +2,6 @@ class DurationParsingException(ValueError):
     ...
 
 
-class DurationFormattingException(ValueError):
-    ...
-
-
-class OutOfDesignators(KeyError):
-    ...
-
-
 class EmptyDuration(DurationParsingException):
     ...
 
@@ -27,4 +19,8 @@ class UnknownToken(DurationParsingException):
 
 
 class UnparseableValue(DurationParsingException):
+    ...
+
+
+class OutOfDesignators(KeyError):
     ...

@@ -1,8 +1,10 @@
 import pytest
 from hypothesis import given
-from hypothesis.strategies import builds, decimals, text, SearchStrategy
+from hypothesis.strategies import SearchStrategy, builds, decimals, text
 
-from isoduration import exceptions, format_duration, parse_duration
+from isoduration.formatter import format_duration
+from isoduration.parser import parse_duration
+from isoduration.parser.exceptions import DurationParsingException
 from isoduration.types import DateDuration, TimeDuration
 
 
@@ -26,5 +28,5 @@ def test_parse_inverse_of_format(date_duration, time_duration):
 
 @given(text())
 def test_parser_not_misbehaving(duration):
-    with pytest.raises(exceptions.DurationParsingException):
+    with pytest.raises(DurationParsingException):
         parse_duration(duration)

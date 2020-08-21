@@ -3,23 +3,21 @@ from decimal import Decimal, InvalidOperation
 
 import arrow  # type: ignore
 
-from isoduration.exceptions import (
-    EmptyDuration,
+from isoduration.parser.exceptions import (
     IncorrectDesignator,
     NoTime,
     OutOfDesignators,
     UnknownToken,
     UnparseableValue,
 )
-from isoduration.types import DateDuration, Duration, TimeDuration
-from isoduration.util import (
+from isoduration.parser.util import (
     is_letter,
     is_number,
-    is_period,
     is_time,
     is_week,
     parse_designator,
 )
+from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 def parse_datetime_duration(duration_str: str, sign: int) -> Duration:
@@ -137,27 +135,3 @@ def parse_time_duration(time_str: str, sign: int) -> TimeDuration:
         raise UnknownToken(f"Token not recognizable: {ch}")
 
     return duration
-
-
-def parse_duration(duration_str: str) -> Duration:
-    if len(duration_str) < 2:
-        raise EmptyDuration("No duration information provided")
-
-    beginning = 1
-    first = duration_str[beginning - 1]
-
-    sign = +1
-
-    if first == "+":
-        beginning += 1
-    if first == "-":
-        sign = -1
-        beginning += 1
-
-    prefix = duration_str[beginning - 1]
-    duration = duration_str[beginning:]
-
-    if not is_period(prefix):
-        raise EmptyDuration("No prefix provided")
-
-    return parse_date_duration(duration, sign)

@@ -2,7 +2,7 @@ from decimal import Decimal
 
 import pytest
 
-from isoduration import exceptions, parse_duration
+from isoduration.parser import exceptions, parse_duration
 from isoduration.types import DateDuration, TimeDuration
 
 
