@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="isoduration",
-    version="20.7.0",
+    version="20.8.0",
     author="Víctor Muñoz",
     author_email="victorm@marshland.es",
     package_dir={"": "src"},

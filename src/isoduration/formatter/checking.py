@@ -3,27 +3,25 @@ from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 def check_global_sign(duration: Duration) -> int:
-    date_duration, time_duration = duration
-
     is_date_negative = (
-        date_duration.years <= 0
-        and date_duration.months <= 0
-        and date_duration.days <= 0
-        and date_duration.weeks <= 0
+        duration.date.years <= 0
+        and duration.date.months <= 0
+        and duration.date.days <= 0
+        and duration.date.weeks <= 0
     )
     is_time_negative = (
-        time_duration.hours <= 0
-        and time_duration.minutes <= 0
-        and time_duration.seconds <= 0
+        duration.time.hours <= 0
+        and duration.time.minutes <= 0
+        and duration.time.seconds <= 0
     )
 
-    if date_duration != DateDuration() and time_duration != TimeDuration():
+    if duration.date != DateDuration() and duration.time != TimeDuration():
         if is_date_negative and is_time_negative:
             return -1
-    elif date_duration != DateDuration():
+    elif duration.date != DateDuration():
         if is_date_negative:
             return -1
-    elif time_duration != TimeDuration():
+    elif duration.time != TimeDuration():
         if is_time_negative:
             return -1
 

@@ -1,36 +1,39 @@
+from __future__ import annotations
+
 from datetime import datetime
 from decimal import ROUND_HALF_UP, Decimal
+from typing import TYPE_CHECKING
 
 from isoduration.operations.util import max_day_in_month, mod2, mod3, quot2, quot3
-from isoduration.types import Duration
+
+if TYPE_CHECKING:
+    from isoduration.types import Duration
 
 
 def add(start: datetime, duration: Duration) -> datetime:
-    date_duration, time_duration = duration
-
     # Months.
-    temp = Decimal(start.month) + date_duration.months
+    temp = Decimal(start.month) + duration.date.months
     end_month = mod3(temp, Decimal(1), Decimal(13))
     carry = quot3(temp, Decimal(1), Decimal(13))
 
     # Years.
-    end_year = Decimal(start.year) + date_duration.years + carry
+    end_year = Decimal(start.year) + duration.date.years + carry
 
     # Zone.
     end_tzinfo = start.tzinfo
 
     # Seconds.
-    temp = Decimal(start.second) + time_duration.seconds
+    temp = Decimal(start.second) + duration.time.seconds
     end_second = mod2(temp, Decimal("60"))
     carry = quot2(temp, Decimal("60"))
 
     # Minutes.
-    temp = Decimal(start.minute) + time_duration.minutes + carry
+    temp = Decimal(start.minute) + duration.time.minutes + carry
     end_minute = mod2(temp, Decimal("60"))
     carry = quot2(temp, Decimal("60"))
 
     # Hours.
-    temp = Decimal(start.hour) + time_duration.hours + carry
+    temp = Decimal(start.hour) + duration.time.hours + carry
     end_hour = mod2(temp, Decimal("24"))
     carry = quot2(temp, Decimal("24"))
 
@@ -44,7 +47,7 @@ def add(start: datetime, duration: Duration) -> datetime:
     else:
         temp = Decimal(start.day)
 
-    end_day = temp + date_duration.days + carry
+    end_day = temp + duration.date.days + carry
 
     while True:
         if end_day < 1:

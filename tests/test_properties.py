@@ -5,7 +5,7 @@ from hypothesis.strategies import SearchStrategy, builds, decimals, text
 from isoduration.formatter import format_duration
 from isoduration.parser import parse_duration
 from isoduration.parser.exceptions import DurationParsingException
-from isoduration.types import DateDuration, TimeDuration
+from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 item_st = decimals(
@@ -22,7 +22,7 @@ time_duration_st: SearchStrategy[TimeDuration] = builds(
 
 @given(date_duration=date_duration_st, time_duration=time_duration_st)
 def test_parse_inverse_of_format(date_duration, time_duration):
-    duration = (date_duration, time_duration)
+    duration = Duration(date_duration, time_duration)
     assert parse_duration(format_duration(duration)) == duration
 
 

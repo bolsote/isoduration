@@ -26,7 +26,7 @@ def parse_datetime_duration(duration_str: str, sign: int) -> Duration:
     except (arrow.ParserError, ValueError):
         raise UnparseableValue(f"Value could not be parsed as datetime: {duration_str}")
 
-    return (
+    return Duration(
         DateDuration(
             years=sign * duration.year,
             months=sign * duration.month,
@@ -61,7 +61,7 @@ def parse_date_duration(date_str: str, sign: int) -> Duration:
             if time_str == "":
                 raise NoTime("Wanted time, no time provided")
 
-            return (duration, parse_time_duration(time_str, sign))
+            return Duration(duration, parse_time_duration(time_str, sign))
 
         if is_letter(ch):
             try:
@@ -96,7 +96,7 @@ def parse_date_duration(date_str: str, sign: int) -> Duration:
 
         raise UnknownToken(f"Token not recognizable: {ch}")
 
-    return (duration, TimeDuration())
+    return Duration(duration, TimeDuration())
 
 
 def parse_time_duration(time_str: str, sign: int) -> TimeDuration:

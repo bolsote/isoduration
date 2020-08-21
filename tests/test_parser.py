@@ -3,7 +3,7 @@ from decimal import Decimal
 import pytest
 
 from isoduration.parser import exceptions, parse_duration
-from isoduration.types import DateDuration, TimeDuration
+from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 @pytest.mark.parametrize(
@@ -45,21 +45,21 @@ from isoduration.types import DateDuration, TimeDuration
             DateDuration(days=1),
             TimeDuration(hours=2, minutes=3, seconds=4),
         ),
-        ("P3WT2H59S", DateDuration(weeks=3), TimeDuration(hours=2, seconds=59)),
+        ("P3WT2H59S", DateDuration(weeks=3), TimeDuration(hours=2, seconds=59),),
         ("P1DT2H", DateDuration(days=1), TimeDuration(hours=2)),
         ("P1DT12H", DateDuration(days=1), TimeDuration(hours=12)),
         ("P23DT23H", DateDuration(days=23), TimeDuration(hours=23)),
-        ("P1DT2H3M", DateDuration(days=1), TimeDuration(hours=2, minutes=3)),
+        ("P1DT2H3M", DateDuration(days=1), TimeDuration(hours=2, minutes=3),),
         # Floating point.
         ("P0.5Y", DateDuration(years=Decimal("0.5")), TimeDuration()),
         ("P0,5Y", DateDuration(years=Decimal("0.5")), TimeDuration()),
-        ("PT8.5H3S", DateDuration(), TimeDuration(hours=Decimal("8.5"), seconds=3)),
-        ("PT8,5H3S", DateDuration(), TimeDuration(hours=Decimal("8.5"), seconds=3)),
+        ("PT8.5H3S", DateDuration(), TimeDuration(hours=Decimal("8.5"), seconds=3),),
+        ("PT8,5H3S", DateDuration(), TimeDuration(hours=Decimal("8.5"), seconds=3),),
         ("PT2.3H", DateDuration(), TimeDuration(hours=Decimal("2.3"))),
-        ("PT22.22S", DateDuration(), TimeDuration(seconds=Decimal("22.22"))),
+        ("PT22.22S", DateDuration(), TimeDuration(seconds=Decimal("22.22")),),
         # Leading zeroes.
         ("PT000022.22", DateDuration(), TimeDuration()),
-        ("PT000022.22H", DateDuration(), TimeDuration(hours=Decimal("22.22"))),
+        ("PT000022.22H", DateDuration(), TimeDuration(hours=Decimal("22.22")),),
         # Signs.
         ("+P11D", DateDuration(days=11), TimeDuration()),
         ("-P2Y", DateDuration(years=-2), TimeDuration()),
@@ -109,7 +109,7 @@ from isoduration.types import DateDuration, TimeDuration
     ),
 )
 def test_parse_duration(duration, date_duration, time_duration):
-    assert parse_duration(duration) == (date_duration, time_duration)
+    assert parse_duration(duration) == Duration(date_duration, time_duration)
 
 
 @pytest.mark.parametrize(
