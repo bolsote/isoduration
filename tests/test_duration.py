@@ -167,6 +167,7 @@ def test_negate_duration(original, negated):
         (datetime(2000, 2, 29), "P1Y", datetime(2001, 2, 28)),
         (datetime(1996, 2, 29), "P4Y", datetime(2000, 2, 29)),
         (datetime(2096, 2, 29), "P4Y", datetime(2100, 2, 28)),
+        (datetime(2000, 2, 29), "P370D", datetime(2001, 3, 5)),
         (datetime(2000, 2, 29), "P1Y1D", datetime(2001, 3, 1)),
         (datetime(1996, 2, 29), "P4Y1D", datetime(2000, 3, 1)),
         (datetime(2096, 2, 29), "P4Y1D", datetime(2100, 3, 1)),
@@ -179,6 +180,8 @@ def test_negate_duration(original, negated):
         (datetime(2001, 4, 1), "-P1Y1M1D", datetime(2000, 2, 29)),
         (datetime(1987, 2, 11), "P33Y6M11D", datetime(2020, 8, 22)),
         (datetime(2011, 10, 8, 23), "PT1H", datetime(2011, 10, 9)),
+        (datetime(2011, 10, 8, 23), "PT90M", datetime(2011, 10, 9, 0, 30)),
+        (datetime(2011, 10, 8, 23), "PT26H", datetime(2011, 10, 10, 1)),
         (
             datetime(2000, 1, 12, 12, 13, 14),
             "P1Y3M5DT7H10M3.3S",
