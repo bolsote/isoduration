@@ -6,7 +6,7 @@ from isoduration.constants import PERIOD_PREFIX
 from isoduration.formatter.checking import check_global_sign
 from isoduration.formatter.formatting import format_date, format_time
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from isoduration.types import Duration
 
 

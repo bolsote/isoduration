@@ -1,3 +1,17 @@
+"""
+Exception
+ +- ValueError
+ |   +- DurationParsingException
+ |   |   +- EmptyDuration
+ |   |   +- IncorrectDesignator
+ |   |   +- NoTime
+ |   |   +- UnknownToken
+ |   |   +- UnparseableValue
+ +- KeyError
+     +- OutOfDesignators
+"""
+
+
 class DurationParsingException(ValueError):
     ...
 

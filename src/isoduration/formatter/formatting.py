@@ -1,6 +1,12 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from isoduration.constants import PERIOD_PREFIX, TIME_PREFIX
 from isoduration.formatter.checking import validate_date_duration
-from isoduration.types import DateDuration, TimeDuration
+
+if TYPE_CHECKING:  # pragma: no cover
+    from isoduration.types import DateDuration, TimeDuration
 
 
 def format_date(date_duration: DateDuration, global_sign: int) -> str:

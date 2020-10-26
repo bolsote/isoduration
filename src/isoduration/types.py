@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
 
+from isoduration.formatter import format_duration
 from isoduration.operations import add
 
 
@@ -16,7 +17,10 @@ class DateDuration:
 
     def __neg__(self) -> DateDuration:
         return DateDuration(
-            years=-self.years, months=-self.months, days=-self.days, weeks=-self.weeks,
+            years=-self.years,
+            months=-self.months,
+            days=-self.days,
+            weeks=-self.weeks,
         )
 
 
@@ -28,7 +32,9 @@ class TimeDuration:
 
     def __neg__(self) -> TimeDuration:
         return TimeDuration(
-            hours=-self.hours, minutes=-self.minutes, seconds=-self.seconds,
+            hours=-self.hours,
+            minutes=-self.minutes,
+            seconds=-self.seconds,
         )
 
 
@@ -41,16 +47,26 @@ class Duration:
         return f"{self.__class__.__name__}({self.date}, {self.time})"
 
     def __str__(self) -> str:
-        return ""
+        return format_duration(self)
 
     def __hash__(self) -> int:
-        return 0
+        return hash(
+            (
+                self.date.years,
+                self.date.months,
+                self.date.days,
+                self.date.weeks,
+                self.time.hours,
+                self.time.minutes,
+                self.time.seconds,
+            )
+        )
 
     def __eq__(self, other: object) -> bool:
         if isinstance(other, Duration):
             return self.date == other.date and self.time == other.time
 
-        return NotImplemented
+        raise NotImplementedError
 
     def __neg__(self) -> Duration:
         return Duration(-self.date, -self.time)
@@ -59,15 +75,15 @@ class Duration:
         if isinstance(other, datetime):
             return add(other, self)
 
-        return NotImplemented
+        raise NotImplementedError
 
     __radd__ = __add__
 
-    def __sub__(self, other: object) -> NotImplemented:
-        return NotImplemented
+    def __sub__(self, other: object) -> None:
+        raise NotImplementedError
 
     def __rsub__(self, other: datetime) -> datetime:
         if isinstance(other, datetime):
             return -self + other
 
-        return NotImplemented
+        raise NotImplementedError

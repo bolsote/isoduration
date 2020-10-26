@@ -1,10 +1,10 @@
-import pytest
+from datetime import timedelta
+
 from hypothesis import given
-from hypothesis.strategies import SearchStrategy, builds, decimals, text
+from hypothesis.strategies import SearchStrategy, builds, datetimes, decimals
 
 from isoduration.formatter import format_duration
 from isoduration.parser import parse_duration
-from isoduration.parser.exceptions import DurationParsingException
 from isoduration.types import DateDuration, Duration, TimeDuration
 
 
@@ -26,7 +26,15 @@ def test_parse_inverse_of_format(date_duration, time_duration):
     assert parse_duration(format_duration(duration)) == duration
 
 
-@given(text())
-def test_parser_not_misbehaving(duration):
-    with pytest.raises(DurationParsingException):
-        parse_duration(duration)
+@given(date_duration=date_duration_st, time_duration=time_duration_st)
+def test_duration_double_negation(date_duration, time_duration):
+    duration = Duration(date_duration, time_duration)
+    neg_duration = -duration
+
+    assert -neg_duration == duration
+
+
+@given(datetimes())
+def test_duration_addition_identity_element(base_datetime):
+    identity = Duration(DateDuration(), TimeDuration())
+    assert (base_datetime + identity) - base_datetime < timedelta(seconds=1)

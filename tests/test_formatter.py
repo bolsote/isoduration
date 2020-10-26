@@ -44,12 +44,19 @@ from isoduration.types import DateDuration, Duration, TimeDuration
         (Duration(DateDuration(), TimeDuration(hours=36)), "PT36H"),
         (Duration(DateDuration(), TimeDuration(minutes=1)), "PT1M"),
         (Duration(DateDuration(), TimeDuration(seconds=22)), "PT22S"),
-        (Duration(DateDuration(), TimeDuration(minutes=3, seconds=4)), "PT3M4S",),
-        (Duration(DateDuration(), TimeDuration(hours=6, seconds=59)), "PT6H59S",),
+        (
+            Duration(DateDuration(), TimeDuration(minutes=3, seconds=4)),
+            "PT3M4S",
+        ),
+        (
+            Duration(DateDuration(), TimeDuration(hours=6, seconds=59)),
+            "PT6H59S",
+        ),
         # Some fields, date and time.
         (
             Duration(
-                DateDuration(days=1), TimeDuration(hours=2, minutes=3, seconds=4),
+                DateDuration(days=1),
+                TimeDuration(hours=2, minutes=3, seconds=4),
             ),
             "P1DT2H3M4S",
         ),
@@ -57,19 +64,40 @@ from isoduration.types import DateDuration, Duration, TimeDuration
             Duration(DateDuration(weeks=3), TimeDuration(hours=2, seconds=59)),
             "P3WT2H59S",
         ),
-        (Duration(DateDuration(days=1), TimeDuration(hours=2)), "P1DT2H",),
-        (Duration(DateDuration(days=1), TimeDuration(hours=12)), "P1DT12H",),
-        (Duration(DateDuration(days=23), TimeDuration(hours=23)), "P23DT23H",),
-        (Duration(DateDuration(days=1), TimeDuration(hours=2, minutes=3)), "P1DT2H3M",),
+        (
+            Duration(DateDuration(days=1), TimeDuration(hours=2)),
+            "P1DT2H",
+        ),
+        (
+            Duration(DateDuration(days=1), TimeDuration(hours=12)),
+            "P1DT12H",
+        ),
+        (
+            Duration(DateDuration(days=23), TimeDuration(hours=23)),
+            "P23DT23H",
+        ),
+        (
+            Duration(DateDuration(days=1), TimeDuration(hours=2, minutes=3)),
+            "P1DT2H3M",
+        ),
         # Floating point.
         (Duration(DateDuration(years=0.5), TimeDuration()), "P0.5Y"),
-        (Duration(DateDuration(), TimeDuration(hours=8.5, seconds=3)), "PT8.5H3S",),
+        (
+            Duration(DateDuration(), TimeDuration(hours=8.5, seconds=3)),
+            "PT8.5H3S",
+        ),
         (Duration(DateDuration(), TimeDuration(hours=2.3)), "PT2.3H"),
-        (Duration(DateDuration(), TimeDuration(seconds=22.22)), "PT22.22S",),
+        (
+            Duration(DateDuration(), TimeDuration(seconds=22.22)),
+            "PT22.22S",
+        ),
         # Signs.
         (Duration(DateDuration(years=-2), TimeDuration()), "-P2Y"),
         (Duration(DateDuration(weeks=-2), TimeDuration()), "-P2W"),
-        (Duration(DateDuration(weeks=-2.2), TimeDuration()), "-P2.2W",),
+        (
+            Duration(DateDuration(weeks=-2.2), TimeDuration()),
+            "-P2.2W",
+        ),
         (
             Duration(
                 DateDuration(years=-3, months=-6, days=-4),
@@ -93,17 +121,30 @@ from isoduration.types import DateDuration, Duration, TimeDuration
         ),
         (
             Duration(
-                DateDuration(days=-1), TimeDuration(hours=-2, minutes=-3, seconds=-4),
+                DateDuration(days=-1),
+                TimeDuration(hours=-2, minutes=-3, seconds=-4),
             ),
             "-P1DT2H3M4S",
         ),
         (
-            Duration(DateDuration(years=-3, months=-6, days=-4), TimeDuration(),),
+            Duration(
+                DateDuration(years=-3, months=-6, days=-4),
+                TimeDuration(),
+            ),
             "-P3Y6M4D",
         ),
-        (Duration(DateDuration(), TimeDuration(hours=-6, minutes=-3)), "-PT6H3M",),
-        (Duration(DateDuration(), TimeDuration(hours=-6, minutes=3)), "PT-6H3M",),
-        (Duration(DateDuration(), TimeDuration(hours=6, minutes=-3)), "PT6H-3M",),
+        (
+            Duration(DateDuration(), TimeDuration(hours=-6, minutes=-3)),
+            "-PT6H3M",
+        ),
+        (
+            Duration(DateDuration(), TimeDuration(hours=-6, minutes=3)),
+            "PT-6H3M",
+        ),
+        (
+            Duration(DateDuration(), TimeDuration(hours=6, minutes=-3)),
+            "PT6H-3M",
+        ),
     ),
 )
 def test_format_duration(duration, duration_str):
@@ -115,7 +156,8 @@ def test_format_duration(duration, duration_str):
     (
         (
             Duration(
-                DateDuration(years=3, months=6, days=4, weeks=12), TimeDuration(),
+                DateDuration(years=3, months=6, days=4, weeks=12),
+                TimeDuration(),
             ),
             DurationFormattingException,
             r"Weeks are incompatible with other date designators",

@@ -6,11 +6,15 @@ from typing import TYPE_CHECKING
 
 from isoduration.operations.util import max_day_in_month, mod2, mod3, quot2, quot3
 
-if TYPE_CHECKING:
+if TYPE_CHECKING:  # pragma: no cover
     from isoduration.types import Duration
 
 
 def add(start: datetime, duration: Duration) -> datetime:
+    """
+    https://www.w3.org/TR/xmlschema-2/#adding-durations-to-dateTimes
+    """
+
     # Months.
     temp = Decimal(start.month) + duration.date.months
     end_month = mod3(temp, Decimal(1), Decimal(13))
@@ -42,12 +46,10 @@ def add(start: datetime, duration: Duration) -> datetime:
 
     if start.day > end_max_day_in_month:
         temp = end_max_day_in_month
-    elif start.day < 1:
-        temp = Decimal(1)
     else:
         temp = Decimal(start.day)
 
-    end_day = temp + duration.date.days + carry
+    end_day = temp + duration.date.days + (7 * duration.date.weeks) + carry
 
     while True:
         if end_day < 1:
