@@ -92,9 +92,9 @@ careful read of [tox.ini](tox.ini) should get you there.
 Some years have 366 days. If it's not always the same, then it's not the same.
 
 ### Why do you create your own types, instead of somewhat shoehorning a `timedelta`?
-`timedelta` cannot represent certain durations, such as those involving weeks. Since it
-cannot represent all possible durations without dangerous arithmetic, then it must not
-be the right type.
+`timedelta` cannot represent certain durations, such as those involving years or months.
+Since it cannot represent all possible durations without dangerous arithmetic, then it
+must not be the right type.
 
 ### Why don't you use regular expressions to parse duration strings?
 [Regular expressions should only be used to parse regular languages.](https://stackoverflow.com/a/1732454)
