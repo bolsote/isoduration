@@ -49,7 +49,7 @@ Besides just parsing them, a number of additional operations are available:
   >>> -parse_duration("P3Y4D")
   Duration(DateDuration(years=Decimal('-3'), months=Decimal('0'), days=Decimal('-4'), weeks=Decimal('0')), TimeDuration(hours=Decimal('0'), minutes=Decimal('0'), seconds=Decimal('0')))
   ```
-- Durations can be added to, or substracted from, Python datetimes:
+- Durations can be added to, or subtracted from, Python datetimes:
   ```py
   >>> from datetime import datetime
   >>> datetime(2020, 3, 15) + parse_duration("P2Y")
@@ -108,7 +108,7 @@ Probably because the standard made me to.
 ### Why do you not support `<insert here a weird case>`?
 Probably because the standard doesn't allow me to.
 
-### Why is it not possible to substract a datetime from a duration?
+### Why is it not possible to subtract a datetime from a duration?
 I'm confused.
 
 ### Why should I use this over some other thing?
@@ -117,7 +117,7 @@ You shouldn't do what people on the Internet tell you to do.
 ### Why are ISO standards so strange?
 Yes.
 
-## Refereces.
+## References.
 
 - [XML Schema Part 2: Datatypes, Appendix D](https://www.w3.org/TR/xmlschema-2/#isoformats):
   This excitingly named document contains more details about ISO 8601 than any human
