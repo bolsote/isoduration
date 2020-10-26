@@ -103,10 +103,10 @@ must not be the right type.
 Because this wonderful representation is not unique.
 
 ### Why do you support `<insert here a weird case>`?
-Probably, because the standard made me to.
+Probably because the standard made me to.
 
 ### Why do you not support `<insert here a weird case>`?
-Probably, because the standard doesn't allow me to.
+Probably because the standard doesn't allow me to.
 
 ### Why is it not possible to substract a datetime from a duration?
 I'm confused.
