@@ -91,6 +91,23 @@ from isoduration.types import DateDuration, Duration, TimeDuration
             Duration(DateDuration(), TimeDuration(seconds=22.22)),
             "PT22.22S",
         ),
+        # Scientific notation.
+        (Duration(DateDuration(years=1e9), TimeDuration()), "P1e+09Y"),
+        (Duration(DateDuration(years=1e-9), TimeDuration()), "P1e-09Y"),
+        (Duration(DateDuration(years=-1e9), TimeDuration()), "-P1e+09Y"),
+        (Duration(DateDuration(), TimeDuration(seconds=90e9)), "PT9e+10S"),
+        (
+            Duration(DateDuration(years=1e3), TimeDuration(hours=1e7)),
+            "P1000YT1e+07H",
+        ),
+        (
+            Duration(DateDuration(years=1e3), TimeDuration(hours=1e-7)),
+            "P1000YT1e-07H",
+        ),
+        (
+            Duration(DateDuration(years=1e3), TimeDuration(hours=-1e7)),
+            "P1000YT-1e+07H",
+        ),
         # Signs.
         (Duration(DateDuration(years=-2), TimeDuration()), "-P2Y"),
         (Duration(DateDuration(weeks=-2), TimeDuration()), "-P2W"),

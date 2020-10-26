@@ -77,6 +77,47 @@ from isoduration.types import DateDuration, Duration, TimeDuration
             DateDuration(),
             TimeDuration(seconds=Decimal("22.22")),
         ),
+        # Scientific notation.
+        (
+            "PT1e3S",
+            DateDuration(),
+            TimeDuration(seconds=Decimal("1000")),
+        ),
+        (
+            "PT1e-3S",
+            DateDuration(),
+            TimeDuration(seconds=Decimal("0.001")),
+        ),
+        (
+            "P1E11Y",
+            DateDuration(years=Decimal("1e11")),
+            TimeDuration(),
+        ),
+        (
+            "P1E+11Y",
+            DateDuration(years=Decimal("1e11")),
+            TimeDuration(),
+        ),
+        (
+            "P-1E11Y",
+            DateDuration(years=Decimal("-1e11")),
+            TimeDuration(),
+        ),
+        (
+            "PT1.03e2H",
+            DateDuration(),
+            TimeDuration(hours=Decimal("103")),
+        ),
+        (
+            "-PT1.03e2H",
+            DateDuration(),
+            TimeDuration(hours=Decimal("-103")),
+        ),
+        (
+            "P10,8E23W",
+            DateDuration(weeks=Decimal("10.8e23")),
+            TimeDuration(),
+        ),
         # Leading zeroes.
         ("PT000022.22", DateDuration(), TimeDuration()),
         (
@@ -103,6 +144,12 @@ from isoduration.types import DateDuration, Duration, TimeDuration
         ("PT-6H3M", DateDuration(), TimeDuration(hours=-6, minutes=3)),
         ("-PT-6H3M", DateDuration(), TimeDuration(hours=6, minutes=-3)),
         ("-PT-6H+3M", DateDuration(), TimeDuration(hours=6, minutes=-3)),
+        # Unconventional numbers, beyond usual boundaries.
+        ("P390D", DateDuration(days=390), TimeDuration()),
+        ("P20M", DateDuration(months=20), TimeDuration()),
+        ("P1000W", DateDuration(weeks=1000), TimeDuration()),
+        ("PT72H", DateDuration(), TimeDuration(hours=72)),
+        ("PT1000000M", DateDuration(), TimeDuration(minutes=1000000)),
         # Alternative format.
         (
             "P0018-09-04T11:09:08",
