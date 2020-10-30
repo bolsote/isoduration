@@ -1,5 +1,7 @@
 # isoduration: Operations with ISO 8601 durations.
 
+[![PyPI Package](https://img.shields.io/pypi/v/isoduration?style=flat-square)](https://pypi.org/project/isoduration/)
+
 ## What is this.
 
 ISO 8601 is most commonly known as a way to exchange datetimes in textual format. A
