@@ -1,0 +1,22 @@
+name: Semgrep
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  semgrep:
+    name: Scan
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - uses: returntocorp/semgrep-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
+          publishDeployment: 123
