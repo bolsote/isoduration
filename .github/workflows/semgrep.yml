@@ -20,4 +20,3 @@ jobs:
         with:
           publishToken: ${{ secrets.SEMGREP_APP_TOKEN }}
           publishDeployment: 1
-          config: p/r2c
