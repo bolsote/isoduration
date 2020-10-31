@@ -1,12 +1,15 @@
 from setuptools import setup, find_packages
 
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+with open("VERSION", "r") as f:
+    version = f.read().strip()
+
+with open("README.md", "r") as f:
+    long_description = f.read()
 
 setup(
     name="isoduration",
-    version="20.11.0",
+    version=version,
     author="Víctor Muñoz",
     author_email="victorm@marshland.es",
     description="Operations with ISO 8601 durations",
