@@ -30,3 +30,8 @@ jobs:
 
     - name: Test
       run: tox -e py
+
+    - name: Upload test coverage
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
