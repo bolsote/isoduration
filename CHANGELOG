@@ -1,0 +1,5 @@
+v20.11.0 - 1/11/2020
+Initial release.
+- Support for parsing ISO 8601 durations.
+- Support for formatting ISO 8601 durations.
+- Support for arithmetic between datetimes and durations.

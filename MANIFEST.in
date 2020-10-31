@@ -1,2 +1,7 @@
 recursive-include src *.py
+
+include CHANGELOG
+include LICENSE
+include README.md
+
 global-exclude *.py[cod] __pycache__
