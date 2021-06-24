@@ -62,20 +62,90 @@ from isoduration.types import DateDuration, Duration, TimeDuration
         ("P0.5Y", DateDuration(years=Decimal("0.5")), TimeDuration()),
         ("P0,5Y", DateDuration(years=Decimal("0.5")), TimeDuration()),
         (
-            "PT8.5H3S",
+            "PT8H3.5S",
             DateDuration(),
-            TimeDuration(hours=Decimal("8.5"), seconds=3),
+            TimeDuration(hours=8, seconds=Decimal("3.5")),
         ),
         (
-            "PT8,5H3S",
+            "PT8H3,5S",
             DateDuration(),
-            TimeDuration(hours=Decimal("8.5"), seconds=3),
+            TimeDuration(hours=8, seconds=Decimal("3.5")),
         ),
         ("PT2.3H", DateDuration(), TimeDuration(hours=Decimal("2.3"))),
         (
             "PT22.22S",
             DateDuration(),
             TimeDuration(seconds=Decimal("22.22")),
+        ),
+        ("P1.3Y", DateDuration(years=Decimal("1.3")), TimeDuration()),
+        (
+            "P1Y2.5M",
+            DateDuration(years=Decimal("1"), months=Decimal("2.5")),
+            TimeDuration(),
+        ),
+        (
+            "P1Y2M6.9D",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6.9")),
+            TimeDuration(),
+        ),
+        ("P14.2W", DateDuration(weeks=Decimal("14.2")), TimeDuration()),
+        (
+            "P1Y2M6DT6.18H",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(hours=Decimal("6.18")),
+        ),
+        (
+            "P1Y2M6DT6H18.11M",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(hours=Decimal("6"), minutes=Decimal("18.11")),
+        ),
+        (
+            "P1Y2M6DT6H18M11.42S",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(
+                hours=Decimal("6"), minutes=Decimal("18"), seconds=Decimal("11.42")
+            ),
+        ),
+        (
+            "P2M6DT6H18M11.42S",
+            DateDuration(months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(
+                hours=Decimal("6"), minutes=Decimal("18"), seconds=Decimal("11.42")
+            ),
+        ),
+        (
+            "P1Y6DT6H18M11.42S",
+            DateDuration(years=Decimal("1"), days=Decimal("6")),
+            TimeDuration(
+                hours=Decimal("6"), minutes=Decimal("18"), seconds=Decimal("11.42")
+            ),
+        ),
+        (
+            "P1Y2MT6H18M11.42S",
+            DateDuration(years=Decimal("1"), months=Decimal("2")),
+            TimeDuration(
+                hours=Decimal("6"), minutes=Decimal("18"), seconds=Decimal("11.42")
+            ),
+        ),
+        (
+            "P1Y2M6DT18M11.42S",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(minutes=Decimal("18"), seconds=Decimal("11.42")),
+        ),
+        (
+            "P1Y2M6DT6H11.42S",
+            DateDuration(years=Decimal("1"), months=Decimal("2"), days=Decimal("6")),
+            TimeDuration(hours=Decimal("6"), seconds=Decimal("11.42")),
+        ),
+        (
+            "P6DT6H11.42S",
+            DateDuration(days=Decimal("6")),
+            TimeDuration(hours=Decimal("6"), seconds=Decimal("11.42")),
+        ),
+        (
+            "P1Y6DT18.11M",
+            DateDuration(years=Decimal("1"), days=Decimal("6")),
+            TimeDuration(minutes=Decimal("18.11")),
         ),
         # Scientific notation.
         (
@@ -286,6 +356,92 @@ def test_parse_duration(duration, date_duration, time_duration):
             "P0003060T123005",
             exceptions.UnparseableValue,
             r"Value could not be parsed as datetime: 0003060T123005",
+        ),
+        # InvalidFractional.
+        (
+            "P1.5Y2M6DT6H18M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2.4M6DT6H18M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6.3DT6H18M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6DT6.2H18M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6DT6H18.1M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1.5Y2M6DT6H18M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2.4M6DT6H18M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6.3DT6H18M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6DT6.2H18M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2M6DT6H18.1M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2.003M6DT6H18.3M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2.003M6.1DT6H18M11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1Y2.003M6DT6H18M11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1.5YT11.42S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P1.5YT11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "P7Y1.5DT11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
+        ),
+        (
+            "PT3.5H11S",
+            exceptions.InvalidFractional,
+            r"Only the lowest order component can be fractional",
         ),
     ),
 )

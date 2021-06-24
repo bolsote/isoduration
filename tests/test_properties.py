@@ -7,16 +7,21 @@ from isoduration.formatter import format_duration
 from isoduration.parser import parse_duration
 from isoduration.types import DateDuration, Duration, TimeDuration
 
-
-item_st = decimals(
+item_st = decimals(min_value=-1_000_000_000_000, max_value=+1_000_000_000_000, places=0)
+seconds_st = decimals(
     min_value=-1_000_000_000_000, max_value=+1_000_000_000_000, places=10
 )
+"""
+Fractional numbers are only allowed by the standard in the lest significant
+component. It's a bit difficult to have a strategy modelling this, so we have
+opted to include fractional numbers just as part of the seconds component.
+"""
 
 date_duration_st: SearchStrategy[DateDuration] = builds(
     DateDuration, years=item_st, months=item_st, days=item_st
 )
 time_duration_st: SearchStrategy[TimeDuration] = builds(
-    TimeDuration, hours=item_st, minutes=item_st, seconds=item_st
+    TimeDuration, hours=item_st, minutes=item_st, seconds=seconds_st
 )
 
 

@@ -1,6 +1,7 @@
 from isoduration.parser.exceptions import EmptyDuration
 from isoduration.parser.parsing import parse_date_duration
 from isoduration.parser.util import is_period
+from isoduration.parser.validation import validate_fractional
 from isoduration.types import Duration
 
 
@@ -25,4 +26,8 @@ def parse_duration(duration_str: str) -> Duration:
     if not is_period(prefix):
         raise EmptyDuration("No prefix provided")
 
-    return parse_date_duration(duration, sign)
+    parsed_duration = parse_date_duration(duration, sign)
+
+    validate_fractional(parsed_duration)
+
+    return parsed_duration
