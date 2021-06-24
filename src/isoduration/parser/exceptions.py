@@ -7,6 +7,7 @@ Exception
  |   |   +- NoTime
  |   |   +- UnknownToken
  |   |   +- UnparseableValue
+ |   |   +- InvalidFractional
  +- KeyError
      +- OutOfDesignators
 """
@@ -33,6 +34,10 @@ class UnknownToken(DurationParsingException):
 
 
 class UnparseableValue(DurationParsingException):
+    ...
+
+
+class InvalidFractional(DurationParsingException):
     ...
 
 
