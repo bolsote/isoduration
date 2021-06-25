@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from decimal import ROUND_HALF_UP, Decimal
+from decimal import ROUND_DOWN, ROUND_HALF_UP, Decimal
 from typing import TYPE_CHECKING
 
 from isoduration.operations.util import max_day_in_month, mod2, mod3, quot2, quot3
@@ -26,8 +26,16 @@ def add(start: datetime, duration: Duration) -> datetime:
     # Zone.
     end_tzinfo = start.tzinfo
 
+    # Microseconds.
+    seconds = duration.time.seconds.to_integral_value(rounding=ROUND_DOWN)
+    microseconds = (duration.time.seconds - seconds) * Decimal("1e6")
+
+    temp = Decimal(start.microsecond) + microseconds
+    end_microsecond = mod2(temp, Decimal("1e6"))
+    carry = quot2(temp, Decimal("1e6"))
+
     # Seconds.
-    temp = Decimal(start.second) + duration.time.seconds
+    temp = Decimal(start.second) + seconds + carry
     end_second = mod2(temp, Decimal("60"))
     carry = quot2(temp, Decimal("60"))
 
@@ -72,5 +80,6 @@ def add(start: datetime, duration: Duration) -> datetime:
         hour=int(end_hour.to_integral_value(ROUND_HALF_UP)),
         minute=int(end_minute.to_integral_value(ROUND_HALF_UP)),
         second=int(end_second.to_integral_value(ROUND_HALF_UP)),
+        microsecond=int(end_microsecond.to_integral_value(ROUND_HALF_UP)),
         tzinfo=end_tzinfo,
     )
