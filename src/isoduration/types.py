@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import datetime
 from decimal import Decimal
+from typing import Iterator, Tuple
 
 from isoduration.formatter import format_duration
 from isoduration.operations import add
@@ -67,6 +68,30 @@ class Duration:
             return self.date == other.date and self.time == other.time
 
         raise NotImplementedError
+
+    def __iter__(self) -> Iterator[Tuple[str, Decimal]]:
+        time_duration = self.time
+        time_order = ("hours", "minutes", "seconds")
+
+        date_duration = self.date
+        date_order = ("years", "months", "days", "weeks")
+
+        for element in date_order:
+            yield element, getattr(date_duration, element)
+        for element in time_order:
+            yield element, getattr(time_duration, element)
+
+    def __reversed__(self) -> Iterator[Tuple[str, Decimal]]:
+        time_duration = self.time
+        time_order = ("seconds", "minutes", "hours")
+
+        date_duration = self.date
+        date_order = ("weeks", "days", "months", "years")
+
+        for element in time_order:
+            yield element, getattr(time_duration, element)
+        for element in date_order:
+            yield element, getattr(date_duration, element)
 
     def __neg__(self) -> Duration:
         return Duration(-self.date, -self.time)
