@@ -259,6 +259,16 @@ def test_parse_duration(duration, date_duration, time_duration):
         # EmptyDuration.
         ("", exceptions.EmptyDuration, r"No duration information provided"),
         ("P", exceptions.EmptyDuration, r"No duration information provided"),
+        ("ajaksdf", exceptions.EmptyDuration, r"No prefix provided"),
+        ("202hghf01217gg", exceptions.EmptyDuration, r"No prefix provided"),
+        ("2015-2", exceptions.EmptyDuration, r"No prefix provided"),
+        ("2015-01-01", exceptions.EmptyDuration, r"No prefix provided"),
+        ("2015-", exceptions.EmptyDuration, r"No prefix provided"),
+        ("2015-garbage", exceptions.EmptyDuration, r"No prefix provided"),
+        ("0003-06-04T12:30:00", exceptions.EmptyDuration, r"No prefix provided"),
+        ("00030604T123005", exceptions.EmptyDuration, r"No prefix provided"),
+        ("16.263772,-61.2329", exceptions.EmptyDuration, r"No prefix provided"),
+        ("1000", exceptions.EmptyDuration, r"No prefix provided"),
         ("1Y2M", exceptions.EmptyDuration, r"No prefix provided"),
         # IncorrectDesignator.
         (
