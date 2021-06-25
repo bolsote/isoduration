@@ -1,9 +1,10 @@
 from datetime import datetime
+from decimal import Decimal
 
 import pytest
 
 from isoduration.parser import parse_duration
-from isoduration.types import DateDuration, TimeDuration, Duration
+from isoduration.types import DateDuration, Duration, TimeDuration
 
 
 def test_representations():
@@ -30,6 +31,34 @@ def test_is_hashable():
     }
 
     assert len(durations) == 2
+
+
+def test_iteration():
+    duration = Duration(DateDuration(weeks=3), TimeDuration(hours=2, seconds=59))
+
+    assert list(duration) == [
+        ("years", Decimal("0")),
+        ("months", Decimal("0")),
+        ("days", Decimal("0")),
+        ("weeks", Decimal("3")),
+        ("hours", Decimal("2")),
+        ("minutes", Decimal("0")),
+        ("seconds", Decimal("59")),
+    ]
+
+
+def test_reverse_iteration():
+    duration = Duration(DateDuration(weeks=3), TimeDuration(hours=2, seconds=59))
+
+    assert list(reversed(duration)) == [
+        ("seconds", Decimal("59")),
+        ("minutes", Decimal("0")),
+        ("hours", Decimal("2")),
+        ("weeks", Decimal("3")),
+        ("days", Decimal("0")),
+        ("months", Decimal("0")),
+        ("years", Decimal("0")),
+    ]
 
 
 @pytest.mark.parametrize(
