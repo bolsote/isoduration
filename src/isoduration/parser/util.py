@@ -1,5 +1,4 @@
 import decimal
-import re
 from typing import Dict
 
 from isoduration.constants import PERIOD_PREFIX, TIME_PREFIX, WEEK_PREFIX
@@ -19,7 +18,7 @@ def is_week(ch: str) -> bool:
 
 
 def is_number(ch: str) -> bool:
-    return bool(re.match(r"[+\-0-9.,eE]", ch))
+    return ch in "+-0123456789.,eE"
 
 
 def is_letter(ch: str) -> bool:
