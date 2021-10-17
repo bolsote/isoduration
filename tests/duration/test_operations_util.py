@@ -2,7 +2,7 @@ from decimal import Decimal
 
 import pytest
 
-from isoduration.operations import max_day_in_month, mod2, mod3, quot2, quot3
+from isoduration.duration.operations import max_day_in_month, mod2, mod3, quot2, quot3
 
 
 @pytest.mark.parametrize(

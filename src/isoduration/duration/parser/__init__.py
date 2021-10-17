@@ -1,8 +1,8 @@
-from isoduration.parser.exceptions import EmptyDuration
-from isoduration.parser.parsing import parse_date_duration
-from isoduration.parser.util import is_period
-from isoduration.parser.validation import validate_fractional
-from isoduration.types import Duration
+from isoduration.duration.parser.exceptions import EmptyDuration
+from isoduration.duration.parser.parsing import parse_date_duration
+from isoduration.duration.parser.util import is_period
+from isoduration.duration.parser.validation import validate_fractional
+from isoduration.duration.types import Duration
 
 
 def parse_duration(duration_str: str) -> Duration:

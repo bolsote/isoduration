@@ -5,8 +5,8 @@ from datetime import datetime
 from decimal import Decimal
 from typing import Iterator, Tuple
 
-from isoduration.formatter import format_duration
-from isoduration.operations import add
+from isoduration.duration.formatter import format_duration
+from isoduration.duration.operations import add
 
 
 @dataclass

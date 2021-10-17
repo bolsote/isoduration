@@ -2,9 +2,9 @@ from decimal import Decimal
 
 import pytest
 
-from isoduration.parser.exceptions import InvalidFractional
-from isoduration.parser.validation import validate_fractional
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration.duration.parser.exceptions import InvalidFractional
+from isoduration.duration.parser.validation import validate_fractional
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 
 @pytest.mark.parametrize(

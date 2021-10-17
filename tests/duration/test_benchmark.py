@@ -1,5 +1,6 @@
-from isodate import parse_duration
-from isoduration import parse_duration as isodate_parse_duration
+from isodate import parse_duration as isodate_parse_duration
+
+from isoduration import parse_duration
 
 
 def test_isoduration(benchmark):

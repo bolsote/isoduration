@@ -3,9 +3,8 @@ from datetime import timedelta
 from hypothesis import given
 from hypothesis.strategies import SearchStrategy, builds, datetimes, decimals
 
-from isoduration.formatter import format_duration
-from isoduration.parser import parse_duration
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration import format_duration, parse_duration
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 item_st = decimals(min_value=-1_000_000_000_000, max_value=+1_000_000_000_000, places=0)
 seconds_st = decimals(

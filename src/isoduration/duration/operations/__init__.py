@@ -4,10 +4,16 @@ from datetime import datetime
 from decimal import ROUND_DOWN, ROUND_HALF_UP, Decimal
 from typing import TYPE_CHECKING
 
-from isoduration.operations.util import max_day_in_month, mod2, mod3, quot2, quot3
+from isoduration.duration.operations.util import (
+    max_day_in_month,
+    mod2,
+    mod3,
+    quot2,
+    quot3,
+)
 
 if TYPE_CHECKING:  # pragma: no cover
-    from isoduration.types import Duration
+    from isoduration.duration.types import Duration
 
 
 def add(start: datetime, duration: Duration) -> datetime:

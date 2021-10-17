@@ -1,3 +1,6 @@
-PERIOD_PREFIX = "P"
-TIME_PREFIX = "T"
-WEEK_PREFIX = "W"
+import typing
+
+PERIOD_PREFIX: typing.Final = "P"
+RECURRING_INTERVAL_PREFIX: typing.Final = "R"
+TIME_PREFIX: typing.Final = "T"
+WEEK_PREFIX: typing.Final = "W"

@@ -2,8 +2,8 @@ from decimal import Decimal
 
 import pytest
 
-from isoduration.parser import exceptions, parse_duration
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration.duration.parser import exceptions, parse_duration
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 
 @pytest.mark.parametrize(

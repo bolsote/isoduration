@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from isoduration.formatter.exceptions import DurationFormattingException
+from isoduration.duration.formatter.exceptions import DurationFormattingException
 
 if TYPE_CHECKING:  # pragma: no cover
-    from isoduration.types import DateDuration, Duration
+    from isoduration.duration.types import DateDuration, Duration
 
 
 def check_global_sign(duration: Duration) -> int:

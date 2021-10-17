@@ -3,8 +3,8 @@ from decimal import Decimal
 
 import pytest
 
-from isoduration.parser import parse_duration
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration.duration.parser import parse_duration
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 
 def test_representations():

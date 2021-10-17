@@ -1,7 +1,7 @@
 import pytest
 
-from isoduration import DurationFormattingException, format_duration
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration.duration.formatter import exceptions, format_duration
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 
 @pytest.mark.parametrize(
@@ -176,7 +176,7 @@ def test_format_duration(duration, duration_str):
                 DateDuration(years=3, months=6, days=4, weeks=12),
                 TimeDuration(),
             ),
-            DurationFormattingException,
+            exceptions.DurationFormattingException,
             r"Weeks are incompatible with other date designators",
         ),
     ),

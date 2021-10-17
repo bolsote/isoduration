@@ -1,6 +1,6 @@
-from isoduration.parser.exceptions import InvalidFractional
-from isoduration.parser.util import is_integer
-from isoduration.types import Duration
+from isoduration.duration.parser.exceptions import InvalidFractional
+from isoduration.duration.parser.util import is_integer
+from isoduration.duration.types import Duration
 
 
 def validate_fractional(duration: Duration) -> None:

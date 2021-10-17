@@ -2,7 +2,7 @@ import decimal
 
 import pytest
 
-from isoduration.parser.util import is_integer
+from isoduration.duration.parser.util import is_integer
 
 
 @pytest.mark.parametrize(

@@ -2,7 +2,7 @@ import decimal
 from typing import Dict
 
 from isoduration.constants import PERIOD_PREFIX, TIME_PREFIX, WEEK_PREFIX
-from isoduration.parser.exceptions import OutOfDesignators
+from isoduration.duration.parser.exceptions import OutOfDesignators
 
 
 def is_period(ch: str) -> bool:
@@ -25,6 +25,10 @@ def is_letter(ch: str) -> bool:
     return ch.isalpha() and ch.lower() != "e"
 
 
+def is_integer(number: decimal.Decimal) -> bool:
+    return number == number.to_integral_value()
+
+
 def parse_designator(designators: Dict[str, str], target: str) -> str:
     while True:
         try:
@@ -34,7 +38,3 @@ def parse_designator(designators: Dict[str, str], target: str) -> str:
 
         if key == target:
             return value
-
-
-def is_integer(number: decimal.Decimal) -> bool:
-    return number == number.to_integral_value()

@@ -3,21 +3,21 @@ from decimal import Decimal, InvalidOperation
 
 import arrow
 
-from isoduration.parser.exceptions import (
+from isoduration.duration.parser.exceptions import (
     IncorrectDesignator,
     NoTime,
     OutOfDesignators,
     UnknownToken,
     UnparseableValue,
 )
-from isoduration.parser.util import (
+from isoduration.duration.parser.util import (
     is_letter,
     is_number,
     is_time,
     is_week,
     parse_designator,
 )
-from isoduration.types import DateDuration, Duration, TimeDuration
+from isoduration.duration.types import DateDuration, Duration, TimeDuration
 
 
 def parse_datetime_duration(duration_str: str, sign: int) -> Duration:

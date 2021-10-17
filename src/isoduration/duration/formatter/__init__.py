@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from isoduration.constants import PERIOD_PREFIX
-from isoduration.formatter.checking import check_global_sign
-from isoduration.formatter.formatting import format_date, format_time
+from isoduration.duration.formatter.checking import check_global_sign
+from isoduration.duration.formatter.formatting import format_date, format_time
 
 if TYPE_CHECKING:  # pragma: no cover
-    from isoduration.types import Duration
+    from isoduration.duration.types import Duration
 
 
 def format_duration(duration: Duration) -> str:
